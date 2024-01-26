@@ -32,38 +32,7 @@
                     </div>
                 </div>
 
-                <div class="row">
 
-
-
-                    <div class="form-group col-md-4">
-                        <label for="expense_type_id">نوع المصروف</label>
-                        <select class="custom-select mr-sm-2" id="expense_type_id" name="expense_type_id">
-                            <option value="" readonly>أختار من القائمة</option>
-                            @foreach ($expense_type as $type)
-                                <option value="{{ $type->id }}" @selected($cashOut->expense_type_id == $type->id)>{{ $type->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('expense_type_id')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="recipient">نوع المستلم</label>
-                        <select class="custom-select mr-sm-2" id="recipient" name="recipient">
-                            <option value="" readonly>أختار من القائمة</option>
-                            <option value="client" @selected($cashOut->recipient == 'client')>عميل</option>
-                            <option value="service_provider" @selected($cashOut->recipient == 'service_provider')>مقدم خدمة</option>
-                            <option value="user" @selected($cashOut->recipient == 'user')>مستخدم</option>
-                        </select>
-                        @error('recipient')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                </div>
 
 
                 <div class="row">
@@ -82,7 +51,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-4" id="client_div">
+                    {{-- <div class="form-group col-md-4" id="client_div">
                         <label for="client_id">العميل</label>
                         <select class="custom-select mr-sm-2" id="client_id" name="client_id">
                             <option value="" readonly>أختار من القائمة</option>
@@ -95,7 +64,7 @@
                         @error('client_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
 
 
 
@@ -105,14 +74,14 @@
                 <div class="row" id="service_provider_div">
                     <div class="form-group col-md-6">
                         <label for="service_provider_id">مقدم الخدمة</label>
-                        <select class="custom-select mr-sm-2" id="service_provider_id" name="service_provider_id">
+                        <select class="custom-select mr-sm-2" id="supplier_id" name="supplier_id">
                             <option value="" readonly>أختار من القائمة</option>
-                            @foreach ($service_providers as $provider)
-                                <option value="{{ $provider->id }}" @selected($cashOut->service_provider_id == $provider->id)>{{ $provider->name }}
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}" @selected($cashOut->supplier_id == $supplier->id)>{{ $supplier->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('service_provider_id')
+                        @error('supplier_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
@@ -169,11 +138,11 @@
         const recipientSelect = document.getElementById('recipient');
         const userFields = document.getElementById('user_id');
         const clientFields = document.getElementById('client_id');
-        const serviceProviderFields = document.getElementById('service_provider_id');
+        const serviceProviderFields = document.getElementById('supplier_id');
 
         const userDiv = document.getElementById('user_div');
         const clientDiv = document.getElementById('client_div');
-        const serviceProviderDiv = document.getElementById('service_provider_div');
+        const serviceProviderDiv = document.getElementById('supplier_div');
 
         // Hide all fields
         userDiv.style.display = 'none';
@@ -185,7 +154,7 @@
             userDiv.style.display = 'block';
         } else if (recipientSelect.value === 'client') {
             clientDiv.style.display = 'block';
-        } else if (recipientSelect.value === 'service_provider') {
+        } else if (recipientSelect.value === 'supplier') {
             serviceProviderDiv.style.display = 'flex';
         }
 
@@ -204,7 +173,7 @@
                 userDiv.style.display = 'block';
             } else if (selectedRecipient === 'client') {
                 clientDiv.style.display = 'block';
-            } else if (selectedRecipient === 'service_provider') {
+            } else if (selectedRecipient === 'supplier') {
                 serviceProviderDiv.style.display = 'flex';
             }
         });

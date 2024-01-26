@@ -366,7 +366,7 @@
                                                                 <tr>
                                                                     <td style="direction: rtl; float: right;">
                                                                         أسم مقدم الخدمة :
-                                                                        {{ $cashOut->service_provider->name }}
+                                                                        {{ $cashOut->supplier->name }}
                                                                         <br>
                                                                         {{-- <br> --}}
                                                                         رقم الأيصال : {{ $cashOut->receipt_number }}
@@ -392,9 +392,9 @@
                                                                                     <td style="padding:15px 0px;">
                                                                                         أسم المستخدم
                                                                                     </td>
-                                                                                    <td style="padding:15px 0px;">
+                                                                                    {{-- <td style="padding:15px 0px;">
                                                                                         أسم الخدمة
-                                                                                    </td>
+                                                                                    </td> --}}
 
                                                                                 </tr>
 
@@ -407,9 +407,9 @@
                                                                                     <td style="padding:10px 0px;">
                                                                                         {{ $cashOut->user->name }}
                                                                                     </td>
-                                                                                    <td style="padding:10px 0px;">
+                                                                                    {{-- <td style="padding:10px 0px;">
                                                                                         {{ $cashOut->expense_type->name }}
-                                                                                    </td>
+                                                                                    </td> --}}
 
                                                                                 </tr>
 

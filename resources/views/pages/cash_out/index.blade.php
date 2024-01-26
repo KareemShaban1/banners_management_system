@@ -15,9 +15,7 @@
                             <th> Id </th>
                             <th> رقم الإيصال </th>
                             <th>التاريخ </th>
-                            <th> نوع المستلم </th>
                             <th> أسم المستلم </th>
-
                             <th> المبلغ </th>
                             <th>العمليات</th>
                         </tr>
@@ -31,12 +29,10 @@
 
                                 </td>
                                 <td>{{ $cash->date }}</td>
-                                <td>
-                                    {{ $cash->expense_type->name }}
-                                </td>
+
 
                                 <td>
-                                    {{ $cash->service_provider->name }}
+                                    {{ $cash->supplier->name }}
                                 </td>
 
                                 <td>{{ $cash->paid_amount }}</td>

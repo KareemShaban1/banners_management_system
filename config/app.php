@@ -160,6 +160,8 @@ return [
          * Package Service Providers...
          */
         Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
         /*
          * Application Service Providers...

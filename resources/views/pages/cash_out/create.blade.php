@@ -41,19 +41,17 @@
                     <div class="form-group col-md-6">
                         <label for="supplier_id">مقدم الخدمة</label>
                         <select class="custom-select mr-sm-2" id="supplier_id" name="supplier_id">
-
+                            <option value="" readonly>أختار من القائمة</option>
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                            @endforeach
                         </select>
                         @error('supplier_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
-
-                </div>
-
-                <div class="row">
-
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="paid_amount"> المبلغ المدفوع</label>
                         <input type="number" class="form-control" name="paid_amount" id="paid_amount">
                         @error('paid_amount')
@@ -61,7 +59,9 @@
                         @enderror
                     </div>
 
+
                 </div>
+
 
                 <div class="row">
 

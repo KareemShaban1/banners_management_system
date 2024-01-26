@@ -5,6 +5,10 @@
             <div class="scrollbar side-menu-bg">
                 <ul class="nav navbar-nav side-menu" id="sidebarnav">
 
+                    <li>
+                        <a href="{{ route('dashboard') }}"><i class="ti-home"></i><span class="right-nav-text">لوحة التحكم
+                            </span> </a>
+                    </li>
 
                     <!-- User Management -->
                     <li>
@@ -18,6 +22,21 @@
                         <ul id="users_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('users.create') }}">أضافة مستخدم</a> </li>
                             <li> <a href="{{ route('users.index') }}">كل المستخدمين</a> </li>
+                        </ul>
+                    </li>
+
+                    <!-- Role Management -->
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#roles_management">
+                            <div class="pull-left"><i class="ti-home"></i><span class="right-nav-text">أدارة
+                                    الصلاحيات</span>
+                            </div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="roles_management" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{ route('roles.create') }}">أضافة صلاحية</a> </li>
+                            <li> <a href="{{ route('roles.index') }}">كل الصلاحيات</a> </li>
                         </ul>
                     </li>
 
