@@ -82,6 +82,7 @@ Route::group([
 
     Route::group([], function () {
         Route::get('prices', [PriceController::class,'index'])->name('prices.index');
+        Route::get('getPrice', [PriceController::class,'getPrice'])->name('prices.getPrice');
         Route::get('prices/create', [PriceController::class,'create'])->name('prices.create');
         Route::post('prices/store', [PriceController::class,'store'])->name('prices.store');
         Route::get('prices/edit/{price}', [PriceController::class,'edit'])->name('prices.edit');

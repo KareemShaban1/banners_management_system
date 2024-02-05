@@ -7,6 +7,10 @@
     var plugin_path = '{{ asset('assets/js/') }}';
 </script>
 
+<script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
+<script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+<script src="{{ asset('assets/js/demo/chart-bar-demo.js') }}"></script>
+
 <!-- chart -->
 <script src="{{ asset('assets/js/chart-init.js') }}"></script>
 <!-- calendar -->

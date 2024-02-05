@@ -45,6 +45,7 @@
 
             <form method="POST" action="{{ route('receive_cash.store') }}" autocomplete="off">
                 @csrf
+
                 <div class="row">
 
 
@@ -76,7 +77,7 @@
 
 
                 <fieldset>
-                    <legend>خاصة بخدمة الترجمة فقط</legend>
+                    <legend>خاصة بالخدمة</legend>
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label for="finish_date">تاريخ تسليم الخدمة</label>
@@ -118,17 +119,11 @@
                 <div class="row">
 
 
-                    <div class="form-group col-md-6" id="client_div" style="margin-top: 15px">
+                    <div class="form-group col-md-4" id="client_div" style="margin-top: 15px">
                         <label for="client_id">
                             العميل
                         </label>
-                        {{-- <select class="custom-select mr-sm-2" id="client_id" name="client_id">
-                            <option value="" readonly>أختار من العملاء</option>
 
-                            @foreach ($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->name }}</option>
-                            @endforeach
-                        </select> --}}
                         <div class="search-input">
                             <input type="text" name="search" id="search" class="form-control" placeholder="بحث">
                             <input type="text" name="client_id" id="client_id" hidden>
@@ -138,30 +133,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-6" style="margin-top: 15px">
-                        <label for="supplier_id">
-                            {{-- مقدم الخدمة --}}
-                        </label>
-                        <select class="custom-select mr-sm-2" id="supplier_id" name="supplier_id">
-                            <option value="" readonly>أختار من مقدمى الخدمات</option>
-                            @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('supplier_id')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-
-
-                </div>
-
-
-
-
-                <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4" style="margin-top: 15px">
                         <label for="service_price"> سعر الخدمة</label>
                         <input type="number" class="form-control" name="service_price" id="service_price">
                         @error('service_price')
@@ -169,7 +141,26 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-4">
+
+                    <div class="form-group col-md-4"
+                        style="flex-wrap: wrap;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+                    margin-top: 15px">
+
+                        <button id="calculatePriceBtn" style="height: 50px" class="btn btn-primary " type="button">حساب سعر
+                            الخدمة</button>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="row">
+
+                    <div class="form-group col-md-6">
                         <label for="paid_amount"> المبلغ المدفوع</label>
                         <input type="number" class="form-control" name="paid_amount" id="paid_amount">
                         @error('paid_amount')
@@ -177,7 +168,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="remaining_amount"> المبلغ المتبقى</label>
                         <input type="number" class="form-control" name="remaining_amount" id="remaining_amount">
                         @error('remaining_amount')
@@ -293,6 +284,32 @@
                 select: function(event, ui) {
                     $("#client_id").val(ui.item.value);
                     $("#search").val(ui.item.label);
+
+                    // var clientId = $("#client_id").val();
+                    // var height = $("#height").val();
+                    // var width = $("#width").val();
+                    // var quantity = $("#quantity").val();
+                    // if (clientId) {
+                    //     // Make an AJAX request to get the client's price
+                    //     $.ajax({
+                    //         url: "{{ route('prices.getPrice') }}", // Replace with the actual route
+                    //         type: 'GET',
+                    //         data: {
+                    //             client_id: clientId,
+                    //             height: height,
+                    //             width: width,
+                    //             quantity: quantity
+                    //         },
+                    //         success: function(data) {
+                    //             // Update the service price input with the received price
+                    //             $("#service_price").val(data.price);
+                    //         },
+                    //         error: function(jqXHR, textStatus, errorThrown) {
+                    //             console.error("AJAX Error:", textStatus, errorThrown);
+                    //             // Handle the error here, e.g., display an error message
+                    //         },
+                    //     });
+                    // }
                     return false;
                 }
 
@@ -302,6 +319,36 @@
                     .append(item.html)
                     .appendTo(ul);
             };
+
+            $("#calculatePriceBtn").on('click', function() {
+                var clientId = $("#client_id").val();
+                var height = $("#height").val();
+                var width = $("#width").val();
+                var quantity = $("#quantity").val();
+
+                if (clientId) {
+                    // Make an AJAX request to get the client's price
+                    $.ajax({
+                        url: "{{ route('prices.getPrice') }}", // Replace with the actual route
+                        type: 'GET',
+                        data: {
+                            client_id: clientId,
+                            height: height,
+                            width: width,
+                            quantity: quantity
+                        },
+                        success: function(data) {
+                            // Update the service price input with the received price
+                            $("#service_price").val(data.price);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error("AJAX Error:", textStatus, errorThrown);
+                            // Handle the error here, e.g., display an error message
+                        },
+                    });
+                }
+            });
+
         })
     </script>
 @endpush

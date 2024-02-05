@@ -1,4 +1,4 @@
-@extends('backend2.layouts.master')
+@extends('layouts.master')
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.1.1/css/buttons.dataTables.min.css">

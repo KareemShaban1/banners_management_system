@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label for="address">العنوان </label>
                         <input type="text" class="form-control" name="address" value="{{ $client->address }}"
                             id="address">
@@ -47,6 +47,20 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
 
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="class_id"> تصنيف العميل</label>
+                        <select class="custom-select mr-sm-2" id="class_id" name="class_id">
+                            <option value="" readonly>أختار من القائمة</option>
+                            @foreach ($classes as $class)
+                                <option value="{{ $class->id }}" @selected($class->id == $client->class_id)>{{ $class->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('class_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 

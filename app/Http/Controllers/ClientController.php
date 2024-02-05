@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Models\ClientClass;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -26,8 +27,9 @@ class ClientController extends Controller
     public function create()
     {
         //
+        $classes = ClientClass::all();
 
-        return view('pages.client.create');
+        return view('pages.client.create',compact('classes'));
 
     }
 
@@ -39,7 +41,8 @@ class ClientController extends Controller
         //
         Client::create($request->all());
 
-        return redirect()->route('clients.index');
+        // redirect to receive cash create
+        return redirect()->route('receive_cash.create');
     }
 
     /**

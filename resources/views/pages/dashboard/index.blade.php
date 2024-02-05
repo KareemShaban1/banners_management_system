@@ -118,7 +118,7 @@
     </div>
 @endsection
 
-@push('scripts')
+@push('js')
     <script>
         // Get the current date
         var currentDate = new Date();
