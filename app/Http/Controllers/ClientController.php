@@ -29,7 +29,7 @@ class ClientController extends Controller
         //
         $classes = ClientClass::all();
 
-        return view('pages.client.create',compact('classes'));
+        return view('pages.client.create', compact('classes'));
 
     }
 
@@ -61,7 +61,9 @@ class ClientController extends Controller
     public function edit(Client $client)
     {
         //
-        return view('pages.client.edit', compact('client'));
+        $classes = ClientClass::all();
+
+        return view('pages.client.edit', compact('client', 'classes'));
     }
 
     /**
