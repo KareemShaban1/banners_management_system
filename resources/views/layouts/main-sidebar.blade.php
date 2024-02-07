@@ -21,7 +21,7 @@
                         </a>
                         <ul id="users_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('users.create') }}">أضافة مستخدم</a> </li>
-                            <li> <a href="{{ route('users.index') }}">كل المستخدمين</a> </li>
+                            <li> <a href="{{ route('users.index') }}">جميع المستخدمين</a> </li>
                         </ul>
                     </li>
 
@@ -36,7 +36,7 @@
                         </a>
                         <ul id="roles_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('roles.create') }}">أضافة صلاحية</a> </li>
-                            <li> <a href="{{ route('roles.index') }}">كل الصلاحيات</a> </li>
+                            <li> <a href="{{ route('roles.index') }}">جميع الصلاحيات</a> </li>
                         </ul>
                     </li>
 
@@ -51,7 +51,7 @@
                         </a>
                         <ul id="clients_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('clients.create') }}"> أضافة عميل </a> </li>
-                            <li> <a href="{{ route('clients.index') }}"> كل العملاء</a> </li>
+                            <li> <a href="{{ route('clients.index') }}"> جميع العملاء</a> </li>
                         </ul>
                     </li>
 
@@ -66,7 +66,7 @@
                         </a>
                         <ul id="clients_class_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('clients_class.create') }}">أضافة تصنيف العملاء</a> </li>
-                            <li> <a href="{{ route('clients_class.index') }}">كل تصنيف العملاء</a> </li>
+                            <li> <a href="{{ route('clients_class.index') }}">جميع تصنيف العملاء</a> </li>
                         </ul>
                     </li>
 
@@ -81,7 +81,7 @@
                         </a>
                         <ul id="materials_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('materials.create') }}"> أضافة خامات</a> </li>
-                            <li> <a href="{{ route('materials.index') }}"> كل الخامات</a> </li>
+                            <li> <a href="{{ route('materials.index') }}"> جميع الخامات</a> </li>
                         </ul>
                     </li>
 
@@ -96,7 +96,7 @@
                         </a>
                         <ul id="prices_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('prices.create') }}"> أضافة أسعار</a> </li>
-                            <li> <a href="{{ route('prices.index') }}"> كل الأسعار</a> </li>
+                            <li> <a href="{{ route('prices.index') }}"> جميع الأسعار</a> </li>
                         </ul>
                     </li>
 
@@ -106,15 +106,15 @@
                     <!-- Suppliers Management -->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#suppliers_management">
-                            <div class="pull-left"><i class="ti-home"></i><span class="right-nav-text">أدارة مزودى
-                                    الخدمات</span>
+                            <div class="pull-left"><i class="ti-home"></i><span class="right-nav-text">أدارة
+                                    الموردين</span>
                             </div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="suppliers_management" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{ route('suppliers.create') }}"> أضافة مزود الخدمات </a> </li>
-                            <li> <a href="{{ route('suppliers.index') }}"> كل مزودى الخدمات </a> </li>
+                            <li> <a href="{{ route('suppliers.create') }}"> أضافة الموردين </a> </li>
+                            <li> <a href="{{ route('suppliers.index') }}"> جميع الموردين </a> </li>
 
                         </ul>
                     </li>
@@ -130,7 +130,7 @@
                         </a>
                         <ul id="receive_cash_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('receive_cash.create') }}">أضافة أستلام نقدية</a> </li>
-                            <li> <a href="{{ route('receive_cash.index') }}">كل أستلامات نقدية</a> </li>
+                            <li> <a href="{{ route('receive_cash.index') }}">جميع أستلامات نقدية</a> </li>
                             <li> <a href="{{ route('receive_cash.cashReceive') }}"> أستلامات النقدية الكاش</a> </li>
                             <li> <a href="{{ route('receive_cash.onlineReceive') }}"> أستلامات النقدية الأونلاين</a>
                             </li>
@@ -151,7 +151,7 @@
                         </a>
                         <ul id="cash_out_management" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ route('cash_out.create') }}">أضافة صرف نقدية</a> </li>
-                            <li> <a href="{{ route('cash_out.index') }}">كل صرف نقدية</a> </li>
+                            <li> <a href="{{ route('cash_out.index') }}">جميع صرف نقدية</a> </li>
                             <li> <a href="{{ route('cash_out.reports') }}">تقاير صرق نقدية</a> </li>
                         </ul>
                     </li>

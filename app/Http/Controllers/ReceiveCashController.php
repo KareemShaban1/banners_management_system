@@ -7,11 +7,12 @@ use App\Http\Requests\StoreReceiveCashRequest;
 use App\Http\Requests\UpdateReceiveCashRequest;
 use App\Models\Client;
 use App\Models\Material;
+use App\Models\OrderItem;
 use App\Models\Supplier;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
-
 
 class ReceiveCashController extends Controller
 {
@@ -72,18 +73,44 @@ class ReceiveCashController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreReceiveCashRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Validate the request data
 
+        // Extract data from the request
+        $requestData = $request->all();
 
-        ReceiveCash::create($request->all());
+        // Create a new ReceiveCash instance
+        $receiveCash = new ReceiveCash();
+        $receiveCash->receive_date = $requestData['receive_date'];
+        $receiveCash->finish_date = $requestData['finish_date'];
+        $receiveCash->client_id = $requestData['client_id'];
+        $receiveCash->service_price = $requestData['service_price'];
+        $receiveCash->paid_amount = $requestData['paid_amount'];
+        $receiveCash->remaining_amount = $requestData['remaining_amount'];
+        $receiveCash->type = $requestData['type'];
+
+        // Handle nullable fields
+        $receiveCash->description = $requestData['description'] ?? null;
+
+        // Save the ReceiveCash instance
+        $receiveCash->save();
+
+        // Handle related models (material_id, height, width, quantity, price)
+        for ($i = 0; $i < count($requestData['material_id']); $i++) {
+            $orderItem = new OrderItem();
+            $orderItem->material_id = $requestData['material_id'][$i];
+            $orderItem->height = $requestData['height'][$i] ?? null;
+            $orderItem->width = $requestData['width'][$i] ?? null;
+            $orderItem->quantity = $requestData['quantity'][$i];
+            $orderItem->price = $requestData['price'][$i];
+            // Associate the order item with the receive cash
+            $receiveCash->orderItems()->save($orderItem);
+        }
 
         return redirect()->route('receive_cash.index');
-
-
-
     }
+
 
     /**
      * Display the specified resource.

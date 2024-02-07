@@ -23,6 +23,7 @@ class StoreClientClassRequest extends FormRequest
     {
         return [
             //
+            'name' => 'required|string'
         ];
     }
 }

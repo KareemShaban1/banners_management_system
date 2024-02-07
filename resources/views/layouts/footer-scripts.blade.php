@@ -7,8 +7,8 @@
     var plugin_path = '{{ asset('assets/js/') }}';
 </script>
 
-<script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
-<script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script> --}}
 <script src="{{ asset('assets/js/demo/chart-bar-demo.js') }}"></script>
 
 <!-- chart -->
@@ -29,7 +29,7 @@
 <!-- validation -->
 <script src="{{ asset('assets/js/validation.js') }}"></script>
 <!-- lobilist -->
-<script src="{{ asset('assets/js/lobilist.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/lobilist.js') }}"></script> --}}
 <!-- custom -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 

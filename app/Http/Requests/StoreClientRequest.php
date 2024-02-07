@@ -23,6 +23,12 @@ class StoreClientRequest extends FormRequest
     {
         return [
             //
+            'class_id' => 'required|exists:client_classes,id',
+            'name' => 'required|string',
+            'company' => 'required|string',
+            'phone_number' => 'required|string|unique:clients,phone_number',
+            'another_phone_number' => 'nullable|string',
+            'address' => 'required|string',
         ];
     }
 }

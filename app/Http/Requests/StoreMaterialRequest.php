@@ -23,6 +23,7 @@ class StoreMaterialRequest extends FormRequest
     {
         return [
             //
+            'name' => 'string|required'
         ];
     }
 }

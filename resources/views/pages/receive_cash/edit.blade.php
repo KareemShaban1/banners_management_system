@@ -39,173 +39,119 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="text-primary page-title">أستلام نقدية</h6>
+            <h6 class="text-primary page-title">تعديل بيانات أستلام النقدية</h6>
         </div>
         <div class="card-body">
-
             <form method="POST" action="{{ route('receive_cash.update', $receiveCash->id) }}" autocomplete="off">
                 @csrf
-                @method('PUT')
+                @method('PUT') <!-- Use PUT method for update -->
+
                 <div class="row">
-
-
+                    <!-- Receive Date -->
                     <div class="form-group col-md-6">
                         <label for="receive_date">تاريخ أستلام النقدية</label>
-                        <input type="date" class="form-control" id="receive_date"
-                            value="{{ $receiveCash->receive_date }}" name="receive_date">
+                        <input type="date" class="form-control" id="receive_date" name="receive_date"
+                            value="{{ $receiveCash->receive_date ?? '' }}">
                         @error('receive_date')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
-
                     </div>
 
-
-                    <div class="form-group col-md-6" style="margin-top: 15px">
-                        <label for="material_id">
-                            {{--    الخدمة --}}
-                        </label>
-                        <select class="custom-select mr-sm-2" id="material_id" name="material_id">
-                            <option value="" readonly>أختار من الخامات</option>
-                            @foreach ($materials as $material)
-                                <option value="{{ $material->id }}" @selected($material->id == $receiveCash->material_id)>{{ $material->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('material_id')
+                    <!-- Finish Date -->
+                    <div class="form-group col-md-6">
+                        <label for="finish_date">تاريخ تسليم الخدمة</label>
+                        <input type="date" class="form-control" id="finish_date" name="finish_date"
+                            value="{{ $receiveCash->finish_date ?? '' }}">
+                        @error('finish_date')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
 
-
-                <fieldset>
-                    <legend>خاصة بخدمة الترجمة فقط</legend>
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <label for="finish_date">تاريخ تسليم الخدمة</label>
-                            <input type="date" class="form-control" id="finish_date"
-                                value="{{ $receiveCash->finish_date }}" name="finish_date">
-                            @error('finish_date')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label for="height"> الطول</label>
-                            <input type="number" class="form-control" value="{{ $receiveCash->height }}" name="height"
-                                id="height">
-                            @error('height')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="width"> العرض</label>
-                            <input type="number" value="{{ $receiveCash->width }}" class="form-control" name="width"
-                                id="width">
-                            @error('width')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="quantity">الكمية</label>
-                            <input type="number" class="form-control" value="{{ $receiveCash->quantity }}" name="quantity"
-                                id="quantity">
-                            @error('quantity')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-                    </div>
-                </fieldset>
-
-
-
+                <!-- Client -->
                 <div class="row">
-
-
-                    <div class="form-group col-md-6" id="client_div" style="margin-top: 15px">
+                    <div class="form-group col-md-4" id="client_div" style="margin-top: 15px">
                         <label for="client_id">
                             العميل
                         </label>
-                        {{-- <select class="custom-select mr-sm-2" id="client_id" name="client_id">
-                            <option value="" readonly>أختار من العملاء</option>
 
-                            @foreach ($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->name }}</option>
-                            @endforeach
-                        </select> --}}
                         <div class="search-input">
-                            <input type="text" name="search" id="search" value="{{ $receiveCash->client->name }}"
-                                class="form-control" placeholder="بحث">
-                            <input type="text" name="client_id" id="client_id" value="{{ $receiveCash->client->id }}"
-                                hidden>
+                            <input type="text" name="search" id="search" class="form-control" placeholder="بحث"
+                                value="{{ $receiveCash->client->name ?? '' }}">
+                            <input type="text" name="client_id" id="client_id" hidden
+                                value="{{ $receiveCash->client_id ?? '' }}">
                         </div>
                         @error('client_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-
-                    {{-- <div class="form-group col-md-6" style="margin-top: 15px">
-                        <label for="supplier_id">
-                        </label>
-                        <select class="custom-select mr-sm-2" id="supplier_id" name="supplier_id">
-                            <option value="" readonly>أختار من مقدمى الخدمات</option>
-
-                            @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}" @selected($supplier->id == $receiveCash->supplier_id)>{{ $supplier->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('supplier_id')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
-
-
-
                 </div>
 
-
-
-
+                <!-- Material Table -->
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 child-repeater-table">
+                        <table class="table table-bordered table-responsive" id="table">
+                            <thead>
+                                <tr>
+                                    <th>الخامة</th>
+                                    <th>الطول</th>
+                                    <th>العرض</th>
+                                    <th>الكمية</th>
+                                    <th>السعر</th>
+                                    <th>حساب السعر</th>
+                                    <th>
+                                        <a href="javascript:void(0)" class="btn btn-success addRow">أضافة</a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                @foreach ($receiveCash->orderItems as $item)
+                                    <tr>
+                                        <td>
+                                            <select class="custom-select mr-sm-2" id="material_id" name="material_id[]">
+                                                <option value="" readonly>أختار من الخامات</option>
+                                                @foreach ($materials as $material)
+                                                    <option value="{{ $material->id }}"
+                                                        @if ($material->id == $item->material_id) selected @endif>
+                                                        {{ $material->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td><input type="number" name="height[]" class="form-control" style="width: 150px;"
+                                                placeholder="الطول" value="{{ $item->height }}"></td>
+                                        <td><input type="number" name="width[]" class="form-control" style="width: 150px;"
+                                                placeholder="العرض" value="{{ $item->width }}"></td>
+                                        <td><input type="number" name="quantity[]" class="form-control"
+                                                style="width: 150px;" placeholder="الكمية" value="{{ $item->quantity }}">
+                                        </td>
+                                        <td><input type="number" name="price[]" class="form-control" style="width: 150px;"
+                                                placeholder="السعر" value="{{ $item->price }}"></td>
+                                        <th><a href="javascript:void(0)" class="btn btn-warning calcPrice"> حساب السعر </a>
+                                        </th>
+                                        <th><a href="javascript:void(0)" class="btn btn-danger deleteRow"> حذف </a></th>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Service Price and Payment Details -->
+                <div class="row">
+                    <div class="form-group col-md-6" style="margin-top: 15px">
                         <label for="service_price"> سعر الخدمة</label>
-                        <input type="number" class="form-control" value="{{ $receiveCash->service_price }}"
-                            name="service_price" id="service_price">
+                        <input type="number" class="form-control" name="service_price" id="service_price"
+                            value="{{ $receiveCash->service_price ?? '' }}">
                         @error('service_price')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-4">
-                        <label for="paid_amount"> المبلغ المدفوع</label>
-                        <input type="number" class="form-control" value="{{ $receiveCash->paid_amount }}"
-                            name="paid_amount" id="paid_amount">
-                        @error('paid_amount')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="remaining_amount"> المبلغ المتبقى</label>
-                        <input type="number" class="form-control" value="{{ $receiveCash->remaining_amount }}"
-                            name="remaining_amount" id="remaining_amount">
-                        @error('remaining_amount')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                </div>
-
-                <div class="row">
                     <div class="col-md-6 form-group">
-                        <label for="type">النوع</label>
+                        <label for="type">نوع الدفع</label>
                         <select name="type" id="type" class="custom-select mr-sm-2">
-                            <option value="cash" @selected($receiveCash->type == 'cash')>كاش</option>
-                            <option value="online" @selected($receiveCash->type == 'online')>أونلاين</option>
+                            <option value="cash" @if ($receiveCash->type == 'cash') selected @endif>كاش</option>
+                            <option value="online" @if ($receiveCash->type == 'online') selected @endif>أونلاين</option>
                         </select>
                         @error('type')
                             <p class="text-danger">{{ $message }}</p>
@@ -213,17 +159,37 @@
                     </div>
                 </div>
 
+                <!-- Paid and Remaining Amount -->
                 <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="paid_amount"> المبلغ المدفوع</label>
+                        <input type="number" class="form-control" name="paid_amount" id="paid_amount"
+                            value="{{ $receiveCash->paid_amount ?? '' }}">
+                        @error('paid_amount')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                    <div class="form-group col-md-12">
-                        <label for="description">الوصف</label>
-                        <textarea class="form-control" id="description" value="{{ $receiveCash->description }}" name="description"
-                            rows="3"></textarea>
+                    <div class="form-group col-md-4">
+                        <label for="remaining_amount"> المبلغ المتبقى</label>
+                        <input type="number" class="form-control" name="remaining_amount" id="remaining_amount"
+                            value="{{ $receiveCash->remaining_amount ?? '' }}">
+                        @error('remaining_amount')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
+                <!-- Description -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="description">الوصف</label>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ $receiveCash->description ?? '' }}</textarea>
+                    </div>
+                </div>
 
-                <button type="submit" class="btn btn-primary">تأكيد</button>
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">تحديث</button>
             </form>
         </div>
     </div>
@@ -231,6 +197,85 @@
 
 @push('js')
     <script>
+        jQuery(document).ready(function($) {
+
+            // Function to calculate the total service price
+            function calculateServicePrice() {
+                var totalPrice = 0;
+                // Loop through each price input
+                $('input[name="price[]"]').each(function() {
+                    // Get the price value and add it to the total
+                    var price = parseFloat($(this).val()) || 0;
+                    totalPrice += price;
+                });
+                // Set the calculated total price in the service price input field
+                $('#service_price').val(totalPrice);
+            }
+
+            // Call the calculateServicePrice function when the page is ready
+            calculateServicePrice();
+            // Your jQuery code here
+            $('thead').on('click', '.addRow', function() {
+                var tr = '<tr>' +
+                    '<td>' +
+                    '<select class="custom-select mr-sm-2" id="material_id" name="material_id[]">' +
+                    '<option value="" readonly>أختار من الخامات</option>';
+                // Add options for each material
+                @foreach ($materials as $material)
+                    tr += '<option value="{{ $material->id }}">{{ $material->name }}</option>';
+                @endforeach
+                tr += '</select>' +
+                    '</td>' +
+                    '<td><input type="number" name="height[]" class="form-control" style="width: 150px;" placeholder="الطول"></td>' +
+                    '<td><input type="number" name="width[]" class="form-control" style="width: 150px;" placeholder="العرض"></td>' +
+                    '<td><input type="number"  name="quantity[]" class="form-control" style="width: 150px;" placeholder="الكمية"></td>' +
+                    '<td><input type="number"  name="price[]" class="form-control" style="width: 150px;" placeholder="السعر"></td>' +
+                    '<td><a href="javascript:void(0)" class="btn btn-warning calcPrice"> حساب السعر </a></td>' +
+                    '<td><a href="javascript:void(0)" class="btn btn-danger deleteRow"> حذف </a></td>';
+                $('#tbody').append(tr);
+            });
+
+            $('tbody').on('click', '.calcPrice', function() {
+                // Get the current row
+                var row = $(this).closest('tr');
+
+                // Get the values from the inputs in the current row
+                var height = row.find('input[name="height[]"]').val();
+                var width = row.find('input[name="width[]"]').val();
+                var quantity = row.find('input[name="quantity[]"]').val();
+                var materialId = row.find('select[name="material_id[]"]').val();
+                var clientId = $("#client_id").val();
+
+                // Make an AJAX request to get the price for this specific row
+                $.ajax({
+                    url: "{{ route('prices.getPrice') }}", // Replace with the actual route
+                    type: 'GET',
+                    data: {
+                        height: height,
+                        width: width,
+                        quantity: quantity,
+                        material_id: materialId,
+                        client_id: clientId
+                    },
+                    success: function(data) {
+                        // Update the price input in this row with the received price
+                        row.find('input[name="price[]"]').val(data.price);
+
+                        calculateServicePrice();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX Error:", textStatus, errorThrown);
+                        // Handle the error here, e.g., display an error message
+                    }
+                });
+            });
+
+            $('tbody').on('click', '.deleteRow', function() {
+                $(this).parent().parent().remove();
+            });
+
+            // Rest of your jQuery code...
+        });
         // Get references to the input fields
         const servicePriceInput = document.getElementById('service_price');
         const paidAmountInput = document.getElementById('paid_amount');
@@ -316,6 +361,8 @@
                     .append(item.html)
                     .appendTo(ul);
             };
+
+
         })
     </script>
 @endpush

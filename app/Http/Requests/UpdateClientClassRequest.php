@@ -23,6 +23,7 @@ class UpdateClientClassRequest extends FormRequest
     {
         return [
             //
+            'name' => 'required|string'
         ];
     }
 }

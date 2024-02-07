@@ -33,7 +33,7 @@ class ClientClassController extends Controller
     public function store(StoreClientClassRequest $request)
     {
         //
-        $clientClass = ClientClass::create($request->all());
+        ClientClass::create($request->all());
 
         return redirect()->route('clients_class.index');
 

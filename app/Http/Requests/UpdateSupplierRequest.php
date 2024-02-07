@@ -23,6 +23,11 @@ class UpdateSupplierRequest extends FormRequest
     {
         return [
             //
+            'name' => 'required|string',
+            'phone_number' => 'required|string|unique:clients,phone_number',
+            'another_phone_number' => 'nullable|string',
+            'address' => 'required|string',
+            'email'=>'required|email'
         ];
     }
 }

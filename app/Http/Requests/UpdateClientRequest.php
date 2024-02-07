@@ -23,6 +23,12 @@ class UpdateClientRequest extends FormRequest
     {
         return [
             //
+            'class_id' => 'required|exists:client_classes,id',
+            'name' => 'required|string',
+            'company' => 'required|string',
+            'phone_number' => 'required|string|unique:clients,phone_number,' . $this->id,
+            'another_phone_number' => 'nullable|string',
+            'address' => 'required|string',
         ];
     }
 }

@@ -23,6 +23,7 @@ class UpdateMaterialRequest extends FormRequest
     {
         return [
             //
+            'name' => 'string|required'
         ];
     }
 }

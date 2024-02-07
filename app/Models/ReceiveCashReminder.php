@@ -16,7 +16,7 @@ class ReceiveCashReminder extends Model
      *
      * @var string
      */
-    protected $table = 'receive_cash_reminder';
+    protected $table = 'receive_cash_reminders';
 
     /**
      * The attributes that are mass assignable.

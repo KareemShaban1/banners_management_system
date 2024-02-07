@@ -23,6 +23,9 @@ class StorePriceRequest extends FormRequest
     {
         return [
             //
+            'class_id' => 'required|exists:client_classes,id',
+            'material_id' => 'required|exists:materials,id',
+            'price' => 'required|string'
         ];
     }
 }

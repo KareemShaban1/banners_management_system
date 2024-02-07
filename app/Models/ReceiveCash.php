@@ -78,6 +78,12 @@ class ReceiveCash extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function orderItems()
+    {
+        return $this->belongsToMany(OrderItem::class, 'receive_item', 'receive_cash_id', 'item_id')
+            ->withTimestamps();
+    }
+
 
 
 }

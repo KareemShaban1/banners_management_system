@@ -301,59 +301,9 @@
         }
     </style>
 
-    {{-- <style>
-        body {
-            direction: rtl;
-            font-family: 'XBRiyaz', sans-serif;
-            font-size: 18px
-        }
-
-        /* -------------------------------------
-          INVOICE
-          Styles for the billing table
-          ------------------------------------- */
-        .invoice {
-            margin: 40px auto;
-            text-align: left;
-            width: 80%;
-        }
-
-        .invoice td {
-            padding: 5px 0;
-        }
-
-        .invoice .invoice-items {
-            width: 100%;
-        }
-
-        .invoice .invoice-items td {
-            border-top: #eee 1px solid;
-        }
-
-        .invoice .invoice-items .total td {
-            border-top: 2px solid #333;
-            border-bottom: 2px solid #333;
-            font-weight: 700;
-        }
-    </style> --}}
 </head>
 
 <body>
-    {{-- <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>أسم المستلم</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>{{ $receiveCash->id }}</td>
-                <td>{{ $receiveCash->client->name }}</td>
-            </tr>
-        </tbody>
-    </table> --}}
 
     <table class="body-wrap">
         <tbody>
@@ -381,9 +331,7 @@
                                                                     <td style="direction: rtl; float: right;">
                                                                         أسم العميل : {{ $receiveCash->client->name }}
                                                                         <br>
-                                                                        {{-- <br> --}}
                                                                         رقم الأيصال : {{ $receiveCash->receipt_number }}
-                                                                        {{-- <br> --}}
                                                                         <br>
                                                                         التاريخ : {{ $receiveCash->receive_date }}
                                                                         <br>
@@ -399,8 +347,9 @@
                                                                             cellspacing="0">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td style="text-align: left">
-                                                                                        المبلغ المدفوع
+                                                                                    <td></td>
+
+                                                                                    <td>
                                                                                     </td>
                                                                                     <td style="text-align: left">
                                                                                         سعر الخدمة
@@ -408,41 +357,86 @@
                                                                                     <td>
                                                                                         أسم الخامة
                                                                                     </td>
-                                                                                    {{-- <td>
-                                                                                        أسم المستخدم
-                                                                                    </td> --}}
+
+
 
                                                                                 </tr>
-
+                                                                                {{-- 
                                                                                 <tr>
+                                                                                    <td></td>
+
                                                                                     <td
                                                                                         style="text-align: left; direction:rtl;
                                                                                         padding:20px 0px;">
                                                                                         {{ $receiveCash->paid_amount }}
-                                                                                        {{-- {{ numberToArabicWords($receiveCash->paid_amount) }} --}}
                                                                                         جنية
                                                                                     </td>
 
                                                                                     <td
                                                                                         style="text-align: left; direction:rtl;
                                                                                     padding:20px 0px;">
+                                                                                        @foreach ($receiveCash->orderItems as $orderItem)
+                                                                                            جنية
+                                                                                            {{ $orderItem->price }}
+                                                                                        @endforeach
+
+                                                                                    </td>
+                                                                                    <td style=" padding:20px 0px;">
+                                                                                        @foreach ($receiveCash->orderItems as $orderItem)
+                                                                                            {{ $orderItem->material->name }}
+                                                                                        @endforeach
+                                                                                    </td>
+
+
+
+                                                                                </tr> --}}
+
+                                                                                @foreach ($receiveCash->orderItems as $orderItem)
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td></td>
+
+                                                                                        <td
+                                                                                            style="text-align: left; direction:rtl;
+                                                                                    padding:20px 0px;">
+                                                                                            جنية
+                                                                                            {{ $orderItem->price }}
+
+                                                                                        </td>
+                                                                                        <td style=" padding:20px 0px;">
+
+                                                                                            {{ $orderItem->material->name }}
+
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                                <tr style="direction: rtl">
+                                                                                    <td>
+                                                                                        {{ $receiveCash->paid_amount }}
+                                                                                        جنية
+                                                                                    </td>
+                                                                                    <td>المبلغ
+                                                                                        المدفوع
+                                                                                    </td>
+
+                                                                                    <td>
                                                                                         {{ $receiveCash->service_price }}
                                                                                         جنية
                                                                                     </td>
-                                                                                    <td style=" padding:20px 0px;">
-                                                                                        {{ $receiveCash->material->name }}
+
+                                                                                    <td>
+                                                                                        سعر الخدمة
                                                                                     </td>
-
-                                                                                    {{-- <td style=" padding:20px 0px;">
-                                                                                        {{ $receiveCash->user->name }}
-                                                                                    </td> --}}
-
                                                                                 </tr>
+
                                                                                 <tr>
                                                                                     <td></td>
                                                                                     <td></td>
                                                                                     <td></td>
+                                                                                    <td></td>
                                                                                 </tr>
+
+
 
                                                                                 @php
                                                                                     $numberConverter = app(\App\Services\NumberConverter::class);
@@ -450,7 +444,7 @@
                                                                                 @endphp
 
                                                                                 <tr class="total">
-                                                                                    <td colspan="3"
+                                                                                    <td colspan="4"
                                                                                         style="text-align:center; direction:rtl">
                                                                                         الأجمالى {{ $converted_number }}
                                                                                         جنية فقط لا غير
