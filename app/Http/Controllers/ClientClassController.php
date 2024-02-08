@@ -35,7 +35,7 @@ class ClientClassController extends Controller
         //
         ClientClass::create($request->all());
 
-        return redirect()->route('clients_class.index');
+        return redirect()->route('clients_class.index')->with('toast_success', 'تم أنشاء تصنيف العميل بنجاح');
 
     }
 
@@ -64,7 +64,7 @@ class ClientClassController extends Controller
         //
         $clientClass->update($request->all());
 
-        return redirect()->route('clients_class.index');
+        return redirect()->route('clients_class.index')->with('toast_success', 'تم تعديل تصنيف العميل بنجاح');
 
     }
 
@@ -77,7 +77,7 @@ class ClientClassController extends Controller
 
         $clientClass->delete();
 
-        return redirect()->route('clients_class.index');
+        return redirect()->route('clients_class.index')->with('toast_success', 'تم حذف تصنيف العميل بنجاح');
 
     }
 }

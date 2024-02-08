@@ -36,7 +36,7 @@ class MaterialController extends Controller
         //
         Material::create($request->all());
 
-        return redirect()->route('materials.index');
+        return redirect()->route('materials.index')->with('toast_success', 'تم حفظ الخامة بنجاح');
 
     }
 
@@ -64,7 +64,7 @@ class MaterialController extends Controller
     {
         //
         $material->update($request->all());
-        return redirect()->route('materials.index');
+        return redirect()->route('materials.index')->with('toast_success', 'تم تعديل الخامة بنجاح');
 
     }
 
@@ -75,6 +75,6 @@ class MaterialController extends Controller
     {
         //
         $material->delete();
-        return redirect()->route('materials.index');
+        return redirect()->route('materials.index')->with('toast_success', 'تم حذف الخامة بنجاح');
     }
 }

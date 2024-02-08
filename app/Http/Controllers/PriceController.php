@@ -143,7 +143,7 @@ class PriceController extends Controller
             // Handle the case when the client is not found
             return response()->json(['error' => 'Client not found'], 404);
         }
- 
+
         $classId = $client->class_id;
 
         // Fetch the price based on the client's class ID
@@ -186,7 +186,7 @@ class PriceController extends Controller
         //
         Price::create($request->all());
 
-        return redirect()->route('prices.index');
+        return redirect()->route('prices.index')->with('toast_success', 'تم حفظ السعر بنجاح');
 
 
     }
@@ -218,7 +218,7 @@ class PriceController extends Controller
         //
 
         $price->update($request->all());
-        return redirect()->route('prices.index');
+        return redirect()->route('prices.index')->with('toast_success', 'تم تعديل السعر بنجاح');
 
     }
 
@@ -229,6 +229,6 @@ class PriceController extends Controller
     {
         //
         $price->delete();
-        return redirect()->route('prices.index');
+        return redirect()->route('prices.index')->with('toast_success', 'تم حذف السعر بنجاح');
     }
 }

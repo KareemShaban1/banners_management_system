@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\CashOut;
 use App\Models\Client;
-use App\Models\ExpenseItems;
 use App\Models\Material;
 use App\Models\ReceiveCash;
-use App\Models\Service;
-use App\Models\ServiceProviders;
 use App\Models\Supplier;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -31,7 +27,6 @@ class DashboardController extends Controller
         $cash_out_monthly = CashOut::select(DB::raw('MONTH(date) as month'), DB::raw('SUM(paid_amount) as total_paid_amount'))
         ->groupBy(DB::raw('MONTH(date)'))
         ->get();
-        // dd( $receive_cash_monthly);
         return view(
             'pages.dashboard.index',
             compact(

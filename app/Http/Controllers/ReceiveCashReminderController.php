@@ -50,7 +50,7 @@ class ReceiveCashReminderController extends Controller
         ]);
         ReceiveCashReminder::create($request->except('reminder'));
 
-        return redirect()->route('receive_cash_reminder.index');
+        return redirect()->route('receive_cash_reminder.index')->with('toast_success', 'تم حفظ باقى استلام نقدية بنجاح');
 
     }
 

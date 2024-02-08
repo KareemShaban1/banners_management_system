@@ -108,7 +108,7 @@ class ReceiveCashController extends Controller
             $receiveCash->orderItems()->save($orderItem);
         }
 
-        return redirect()->route('receive_cash.index');
+        return redirect()->route('receive_cash.index')->with('toast_success', 'تم حفظ استلام نقدية بنجاح');
     }
 
 
@@ -146,7 +146,7 @@ class ReceiveCashController extends Controller
 
         $receiveCash->update($request->all());
 
-        return redirect()->route('receive_cash.index');
+        return redirect()->route('receive_cash.index')->with('toast_success', 'تم تعديل استلام نقدية بنجاح');
 
     }
 
@@ -158,7 +158,7 @@ class ReceiveCashController extends Controller
         //
         $receiveCash = ReceiveCash::findOrFail($id);
         $receiveCash->delete();
-        return redirect()->route('receive_cash.index');
+        return redirect()->route('receive_cash.index')->with('toast_success', 'تم حذف استلام نقدية بنجاح');
 
     }
 

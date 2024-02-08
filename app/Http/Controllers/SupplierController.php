@@ -35,7 +35,7 @@ class SupplierController extends Controller
         //
         Supplier::create($request->all());
 
-        return redirect()->route('suppliers.index');
+        return redirect()->route('suppliers.index')->with('toast_success', 'تم حفظ مزود الخدمة بنجاح');
 
 
     }
@@ -64,7 +64,7 @@ class SupplierController extends Controller
     {
         //
         $supplier->update($request->all());
-        return redirect()->route('suppliers.index');
+        return redirect()->route('suppliers.index')->with('toast_success', 'تم تعديل مزود الخدمة بنجاح');
 
     }
 
@@ -75,6 +75,6 @@ class SupplierController extends Controller
     {
         //
         $supplier->delete();
-        return redirect()->route('suppliers.index');
+        return redirect()->route('suppliers.index')->with('toast_success', 'تم حذف مزود الخدمة بنجاح');
     }
 }

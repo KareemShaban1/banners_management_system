@@ -24,12 +24,23 @@
 <!-- sweetalert2 -->
 <script src="{{ asset('assets/js/sweetalert2.js') }}"></script>
 <!-- toastr -->
-@yield('js')
 <script src="{{ asset('assets/js/toastr.js') }}"></script>
 <!-- validation -->
 <script src="{{ asset('assets/js/validation.js') }}"></script>
-<!-- lobilist -->
-{{-- <script src="{{ asset('assets/js/lobilist.js') }}"></script> --}}
+
+<script>
+    @if (session('toast_success'))
+        toastr.success("{{ session('toast_success') }}", "", {
+            "timeOut": 1000
+        }); // Set timeOut to 1000 milliseconds (1 second)
+    @endif
+    @if (session('toast_error'))
+        toastr.error("{{ session('toast_error') }}", "", {
+            "timeOut": 1000
+        }); // Set timeOut to 1000 milliseconds (1 second)
+    @endif
+</script>
+
 <!-- custom -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 

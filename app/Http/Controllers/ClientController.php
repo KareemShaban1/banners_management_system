@@ -42,7 +42,7 @@ class ClientController extends Controller
         Client::create($request->all());
 
         // redirect to receive cash create
-        return redirect()->route('receive_cash.create');
+        return redirect()->route('receive_cash.create')->with('toast_success', 'تم أنشاء العميل بنجاح');
     }
 
     /**
@@ -74,7 +74,7 @@ class ClientController extends Controller
         //
         $client->update($request->all());
 
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('toast_success', 'تم تعديل العميل بنجاح');
 
     }
 
@@ -86,7 +86,7 @@ class ClientController extends Controller
         //
         $client->delete();
 
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('toast_success', 'تم حذف العميل بنجاح');
     }
 
     public function clientsAutocomplete(Request $request)

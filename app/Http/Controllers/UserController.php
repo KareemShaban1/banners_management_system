@@ -47,7 +47,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('toast_success', 'تم حفظ المستخدم بنجاح');
 
     }
 
@@ -101,7 +101,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('toast_success', 'تم تعديل المستخدم بنجاح');
     }
 
 
@@ -113,9 +113,7 @@ class UserController extends Controller
         //
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('users.index');
-
-
+        return redirect()->route('users.index')->with('toast_success', 'تم حذف المستخدم بنجاح');
 
     }
 }
