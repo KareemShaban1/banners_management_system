@@ -4,7 +4,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="text-primary page-title"> Roles</h6>
+            <h6 class="text-primary page-title"> الصلاحيات</h6>
         </div>
         <div class="card-body">
 
@@ -12,7 +12,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group col-md-6">
-                    <label for="name">أسم ال role </label>
+                    <label for="name">أسم الصلاحية </label>
                     <input type="text" class="form-control" name="name" value="{{ $role->name }}" id="name">
                     @error('name')
                         <p class="text-danger">{{ $message }}</p>

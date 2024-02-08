@@ -88,12 +88,14 @@
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'copyHtml5',
+                    "text": "نسخ",
                     exportOptions: {
                         columns: [0, ':visible']
                     }
                 },
                 {
                     extend: 'excelHtml5',
+                    'text': 'أكسيل',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4]
                     },
@@ -101,6 +103,7 @@
                 },
                 {
                     extend: 'print',
+                    'text': 'طباعة',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4]
                     },
@@ -108,7 +111,10 @@
                 },
 
 
-                'colvis'
+                {
+                    extend: 'colvis',
+                    text: 'الأعمدة الظاهرة'
+                }
             ]
         });
     </script>

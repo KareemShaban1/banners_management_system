@@ -80,18 +80,23 @@
                 dom: 'Bfrtip',
                 buttons: [{
                         extend: 'copyHtml5',
+                        text: "نسخ",
                         exportOptions: {
                             columns: [0, ':visible']
                         }
                     },
                     {
                         extend: 'excelHtml5',
+                        text: "أكسيل",
                         exportOptions: {
                             columns: [0, 1, 2]
                         },
                         title: "المستخدمين"
                     },
-                    'colvis'
+                    {
+                        extend: 'colvis',
+                        text: 'الأعمدة الظاهرة'
+                    }
                 ],
 
             });

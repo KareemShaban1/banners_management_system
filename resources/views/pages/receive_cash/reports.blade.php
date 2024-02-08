@@ -38,57 +38,6 @@
                     </div>
 
                 </div>
-                {{-- 
-                <table class="table table-bordered" id="custom_table" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th> Id </th>
-                            <th> رقم الإيصال </th>
-                            <th>التاريخ </th>
-                            <th>أسم المستخدم </th>
-                            <th>أسم العميل </th>
-                            <th>أسم الخدمة </th>
-                            <th> المبلغ </th>
-                            <th>العمليات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($receiveCash as $cash)
-                            <tr>
-                                <td>{{ $cash->id }}</td>
-                                <td>{{ $cash->receipt_number }}</td>
-                                <td>{{ $cash->date }}</td>
-                                <td>{{ $cash->user->name }}</td>
-                                <td>{{ $cash->client->name }}</td>
-                                <td>{{ $cash->service->name }}</td>
-                                <td>{{ $cash->paid_amount }}</td>
-                                <td>
-                                    <a href="{{ route('receive_cash.edit', $cash->id) }}" class="btn btn-warning">تعديل</a>
-                                    <form action="{{ route('receive_cash.delete', $cash->id) }}" method="post"
-                                        style="display:inline">
-                                        @csrf
-                                        @method('delete')
-
-                                        <button type="submit" class="btn btn-danger">
-                                            حذف
-                                        </button>
-                                    </form>
-                                    <a href="{{ route('receive_cash.pdfReport', $cash->id) }}" class="btn btn-primary">
-                                        طباعة
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-
-                    <tfoot>
-                        <tr>
-                            <td colspan="8" style="text-align: center"><b> الاجمالى : <span
-                                        id="totalAmount">{{ number_format($receiveCash->sum('paid_amount'), 2) }}</span></b>
-                            </td>
-                        </tr>
-                    </tfoot>
-                    </tbody>
-                </table> --}}
 
 
                 <table class="table table-bordered" id="custom_table" width="100%" cellspacing="0">
@@ -108,9 +57,7 @@
                     <tbody>
                         @php
 
-                            $today_reminder = App\Models\ReceiveCashReminder::whereDate('receive_cash_reminder_date', Carbon\Carbon::today())
-                                ->latest()
-                                ->first();
+                            $today_reminder = App\Models\ReceiveCashReminder::whereDate('receive_cash_reminder_date', Carbon\Carbon::today())->latest()->first();
                         @endphp
                         @if ($today_reminder)
                             <tr>
@@ -131,7 +78,6 @@
                                 $reminder = App\Models\ReceiveCashReminder::where('receive_cash_id', $cash->id)
                                     ->latest()
                                     ->first();
-                                // dd($cash);
                             @endphp
 
 
@@ -140,7 +86,6 @@
                                 <td>{{ $cash->id }}</td>
                                 <td>{{ $cash->receipt_number }}</td>
                                 <td>{{ $cash->receive_date }}</td>
-                                {{-- <td>{{ $cash->user->name }}</td> --}}
                                 <td>{{ $cash->client->name }}</td>
                                 <td>{{ $cash->service_price }} جنية</td>
                                 <td>{{ $cash->paid_amount }} جنية</td>
@@ -247,48 +192,6 @@
                 $('#totalAmount').text(totalAmount.toFixed(2));
             }
 
-            // Initialize DataTable with your custom options
-            // var datatable = $('#custom_table').DataTable({
-            //     stateSave: true,
-            //     responsive: true,
-            //     // oLanguage: {
-            //     //     sSearch: 'البحث',
-            //     //     sInfo: "Got a total of _TOTAL_ entries to show (_START_ to _END_)",
-            //     //     sZeroRecords: 'لا يوجد سجل متتطابق',
-            //     //     sEmptyTable: 'لا يوجد بيانات في الجدول',
-            //     //     oPaginate: {
-            //     //         sFirst: "First",
-            //     //         sLast: "الأخير",
-            //     //         sNext: "التالى",
-            //     //         sPrevious: "السابق"
-            //     //     },
-            //     // },
-            //     // sortable: true,
-            //     dom: 'Bfrtip',
-            //     buttons: [{
-            //             extend: 'copyHtml5',
-            //             exportOptions: {
-            //                 columns: [0, ':visible']
-            //             }
-            //         },
-            //         {
-            //             extend: 'excelHtml5',
-            //             exportOptions: {
-            //                 columns: [0, 1, 2, 3, 4]
-            //             },
-            //             title: "أستلام نقدية"
-            //         },
-            //         {
-            //             extend: 'print',
-            //             exportOptions: {
-            //                 columns: [0, 1, 2, 3, 4]
-            //             },
-            //             title: "أستلام نقدية"
-            //         },
-
-            //         'colvis'
-            //     ]
-            // });
 
             var datatable = $('#custom_table').DataTable({
                 stateSave: true,
