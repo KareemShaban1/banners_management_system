@@ -119,13 +119,13 @@
                                     </td>
 
                                     <td>
-                                        <input type="number" name="height[]" class="form-control" style="width: 150px;"
-                                            placeholder="الطول">
+                                        <input type="number" name="height[]" step="0.01" class="form-control"
+                                            style="width: 150px;" placeholder="الطول">
 
                                     </td>
                                     <td>
-                                        <input type="number" name="width[]" class="form-control" style="width: 150px;"
-                                            placeholder="العرض">
+                                        <input type="number" name="width[]" step="0.01" class="form-control"
+                                            style="width: 150px;" placeholder="العرض">
 
                                     </td>
                                     <td>
@@ -136,7 +136,7 @@
 
                                     <td>
                                         <input type="number" name="price[]" class="form-control" style="width: 150px;"
-                                            placeholder="السعر">
+                                            placeholder="السعر" readonly>
 
                                     </td>
                                     <th><a href="javascript:void(0)" class="btn btn-warning calcPrice">
@@ -160,13 +160,13 @@
                 <div class="row">
 
                     <div class="form-group col-md-6" style="margin-top: 15px">
-                        <label for="service_price"> سعر الخدمة</label>
-                        <input type="number" class="form-control" name="service_price" id="service_price">
+                        <label for="service_price" step="0.01"> سعر الخدمة</label>
+                        <input type="number" readonly class="form-control" name="service_price" id="service_price">
                         @error('service_price')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
- 
+
 
                     <div class="col-md-6 form-group">
                         <label for="type">نوع الدفع</label>
@@ -199,15 +199,16 @@
 
                     <div class="form-group col-md-4">
                         <label for="paid_amount"> المبلغ المدفوع</label>
-                        <input type="number" class="form-control" name="paid_amount" id="paid_amount">
+                        <input type="number" step="0.01" class="form-control" name="paid_amount" id="paid_amount">
                         @error('paid_amount')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-
+ 
                     <div class="form-group col-md-4">
                         <label for="remaining_amount"> المبلغ المتبقى</label>
-                        <input type="number" class="form-control" name="remaining_amount" id="remaining_amount">
+                        <input type="number" step="0.01" class="form-control" name="remaining_amount"
+                            id="remaining_amount">
                         @error('remaining_amount')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -262,10 +263,10 @@
                 @endforeach
                 tr += '</select>' +
                     '</td>' +
-                    '<td><input type="number" name="height[]" class="form-control" style="width: 150px;" placeholder="الطول"></td>' +
-                    '<td><input type="number" name="width[]" class="form-control" style="width: 150px;" placeholder="العرض"></td>' +
+                    '<td><input type="number" name="height[]" step="0.01" class="form-control" style="width: 150px;" placeholder="الطول"></td>' +
+                    '<td><input type="number" name="width[]" step="0.01" class="form-control" style="width: 150px;" placeholder="العرض"></td>' +
                     '<td><input type="number"  name="quantity[]" class="form-control" style="width: 150px;" placeholder="الكمية"></td>' +
-                    '<td><input type="number"  name="price[]" class="form-control" style="width: 150px;" placeholder="السعر"></td>' +
+                    '<td><input type="number"  name="price[]" readonly class="form-control" style="width: 150px;" placeholder="السعر"></td>' +
                     '<td><a href="javascript:void(0)" class="btn btn-warning calcPrice"> حساب السعر </a></td>' +
                     '<td><a href="javascript:void(0)" class="btn btn-danger deleteRow"> حذف </a></td>';
                 $('#tbody').append(tr);

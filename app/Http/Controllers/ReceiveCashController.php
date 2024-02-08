@@ -73,42 +73,53 @@ class ReceiveCashController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreReceiveCashRequest $request)
     {
-        // Validate the request data
 
-        // Extract data from the request
-        $requestData = $request->all();
 
-        // Create a new ReceiveCash instance
-        $receiveCash = new ReceiveCash();
-        $receiveCash->receive_date = $requestData['receive_date'];
-        $receiveCash->finish_date = $requestData['finish_date'];
-        $receiveCash->client_id = $requestData['client_id'];
-        $receiveCash->service_price = $requestData['service_price'];
-        $receiveCash->paid_amount = $requestData['paid_amount'];
-        $receiveCash->remaining_amount = $requestData['remaining_amount'];
-        $receiveCash->type = $requestData['type'];
+        try {
+            // Validate the request data
+            $validatedData = $request->validated();
 
-        // Handle nullable fields
-        $receiveCash->description = $requestData['description'] ?? null;
 
-        // Save the ReceiveCash instance
-        $receiveCash->save();
+            // Extract data from the request
+            $requestData = $request->all();
 
-        // Handle related models (material_id, height, width, quantity, price)
-        for ($i = 0; $i < count($requestData['material_id']); $i++) {
-            $orderItem = new OrderItem();
-            $orderItem->material_id = $requestData['material_id'][$i];
-            $orderItem->height = $requestData['height'][$i] ?? null;
-            $orderItem->width = $requestData['width'][$i] ?? null;
-            $orderItem->quantity = $requestData['quantity'][$i];
-            $orderItem->price = $requestData['price'][$i];
-            // Associate the order item with the receive cash
-            $receiveCash->orderItems()->save($orderItem);
+            // Create a new ReceiveCash instance
+            $receiveCash = new ReceiveCash();
+            $receiveCash->receive_date = $requestData['receive_date'];
+            $receiveCash->finish_date = $requestData['finish_date'];
+            $receiveCash->client_id = $requestData['client_id'];
+            $receiveCash->service_price = $requestData['service_price'];
+            $receiveCash->paid_amount = $requestData['paid_amount'];
+            $receiveCash->remaining_amount = $requestData['remaining_amount'];
+            $receiveCash->type = $requestData['type'];
+
+            // Handle nullable fields
+            $receiveCash->description = $requestData['description'] ?? null;
+
+            // Save the ReceiveCash instance
+            $receiveCash->save();
+
+            // Handle related models (material_id, height, width, quantity, price)
+            for ($i = 0; $i < count($requestData['material_id']); $i++) {
+                $orderItem = new OrderItem();
+                $orderItem->material_id = $requestData['material_id'][$i];
+                $orderItem->height = $requestData['height'][$i] ?? null;
+                $orderItem->width = $requestData['width'][$i] ?? null;
+                $orderItem->quantity = $requestData['quantity'][$i];
+                $orderItem->price = $requestData['price'][$i];
+                // Associate the order item with the receive cash
+                $receiveCash->orderItems()->save($orderItem);
+            }
+
+            return redirect()->route('receive_cash.index')->with('toast_success', 'تم حفظ استلام نقدية بنجاح');
+        } catch (\Exception $e) {
+            // Handle exceptions or errors
+            $errorMessage = $e->getMessage();
+            // Return error response with appropriate error message
+            return redirect()->back()->with('toast_error', $errorMessage);
         }
-
-        return redirect()->route('receive_cash.index')->with('toast_success', 'تم حفظ استلام نقدية بنجاح');
     }
 
 
@@ -142,12 +153,49 @@ class ReceiveCashController extends Controller
     public function update(UpdateReceiveCashRequest $request, $id)
     {
         //
-        $receiveCash = ReceiveCash::findOrFail($id);
+        try {
+            // Validate the request data
+            $validatedData = $request->validated();
 
-        $receiveCash->update($request->all());
 
-        return redirect()->route('receive_cash.index')->with('toast_success', 'تم تعديل استلام نقدية بنجاح');
+            // Extract data from the request
+            $requestData = $request->all();
 
+            // Create a new ReceiveCash instance
+            $receiveCash = new ReceiveCash();
+            $receiveCash->receive_date = $requestData['receive_date'];
+            $receiveCash->finish_date = $requestData['finish_date'];
+            $receiveCash->client_id = $requestData['client_id'];
+            $receiveCash->service_price = $requestData['service_price'];
+            $receiveCash->paid_amount = $requestData['paid_amount'];
+            $receiveCash->remaining_amount = $requestData['remaining_amount'];
+            $receiveCash->type = $requestData['type'];
+
+            // Handle nullable fields
+            $receiveCash->description = $requestData['description'] ?? null;
+
+            // Save the ReceiveCash instance
+            $receiveCash->save();
+
+            // Handle related models (material_id, height, width, quantity, price)
+            for ($i = 0; $i < count($requestData['material_id']); $i++) {
+                $orderItem = new OrderItem();
+                $orderItem->material_id = $requestData['material_id'][$i];
+                $orderItem->height = $requestData['height'][$i] ?? null;
+                $orderItem->width = $requestData['width'][$i] ?? null;
+                $orderItem->quantity = $requestData['quantity'][$i];
+                $orderItem->price = $requestData['price'][$i];
+                // Associate the order item with the receive cash
+                $receiveCash->orderItems()->save($orderItem);
+            }
+
+            return redirect()->route('receive_cash.index')->with('toast_success', 'تم تعديل استلام نقدية بنجاح');
+        } catch (\Exception $e) {
+            // Handle exceptions or errors
+            $errorMessage = $e->getMessage();
+            // Return error response with appropriate error message
+            return redirect()->back()->with('toast_error', $errorMessage);
+        }
     }
 
     /**

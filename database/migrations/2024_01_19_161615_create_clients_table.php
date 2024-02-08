@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->string('company');
             $table->string('phone_number')->unique();
             $table->string('another_phone_number')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

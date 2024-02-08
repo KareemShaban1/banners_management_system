@@ -28,7 +28,7 @@ class UpdateClientRequest extends FormRequest
             'company' => 'required|string',
             'phone_number' => 'required|string|unique:clients,phone_number,' . $this->id,
             'another_phone_number' => 'nullable|string',
-            'address' => 'required|string',
+            'address' => 'nullable|string',
         ];
     }
 }

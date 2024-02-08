@@ -152,10 +152,10 @@ class PriceController extends Controller
         // Calculate total price based on provided height, width, and quantity
         $totalPrice = 0;
         if (!empty($height) && !empty($width) && !empty($quantity)) {
-            $totalPrice = ($height * $width * $price) * $quantity;
+            $totalPrice = round(($height * $width * $price) * $quantity);
         } elseif (!empty($quantity)) {
             // If only quantity is provided, calculate total price based on quantity
-            $totalPrice = $quantity * $price;
+            $totalPrice = round($quantity * $price);
         } else {
             // Handle the case when no valid data is provided
             return response()->json(['error' => 'No valid data provided'], 400);

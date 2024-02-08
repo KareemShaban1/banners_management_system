@@ -45,6 +45,9 @@ class ClientController extends Controller
         return redirect()->route('receive_cash.create')->with('toast_success', 'تم أنشاء العميل بنجاح');
     }
 
+
+
+
     /**
      * Display the specified resource.
      */

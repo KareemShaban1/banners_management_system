@@ -24,18 +24,18 @@ class StoreReceiveCashRequest extends FormRequest
         return [
             //
             'receive_date' => 'required|date',
-            'material_id' => 'required|exists:materials,id',
-            'user_id' => 'nullable|exists:users,id',
+            'finish_date' => 'required|date|after_or_equal:receive_date',
+            'search' => 'required|string',
             'client_id' => 'required|exists:clients,id',
-            'finish_date' => 'required|date',
-            'service_price' => 'required|numeric',
-            'paid_amount' => 'required|numeric',
-            'remaining_amount' => 'required|numeric',
-            'description' => 'nullable',
-            'type' => 'required',
-            'height' => 'nullable|string',
-            'width' => 'nullable|string',
-            'quantity' => 'nullable|string',
+            'material_id.*' => 'required|exists:materials,id',
+            'height.*' => 'required|numeric|min:0',
+            'width.*' => 'required|numeric|min:0',
+            'quantity.*' => 'required|integer|min:1',
+            'price.*' => 'required|numeric|min:0',
+            'service_price' => 'required|numeric|min:0',
+            'type' => 'required|in:cash,online',
+            'paid_amount' => 'required|numeric|min:0',
+            'remaining_amount' => 'required|numeric|min:0',
         ];
     }
 }
