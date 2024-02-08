@@ -5,14 +5,11 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">لوحة التحكم</h1>
-        {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
+
     </div>
 
     <!-- Content Row -->
     <div class="row">
-        {{-- 'users_count','clients_count','service_providers_count',
-    'services_count','receive_cash_count','cash_out_count','expense_items_count' --}}
 
         <!-- Users -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -186,7 +183,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 10000,
+                            max: 1000000,
                             maxTicksLimit: 10,
                             padding: 10,
                             // Include a dollar sign in the ticks
@@ -272,7 +269,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 10000,
+                            max: 1000000,
                             maxTicksLimit: 10,
                             padding: 10,
                             // Include a dollar sign in the ticks

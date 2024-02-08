@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Banners Systems</title>
 
-    
+
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="{{ asset('auth/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
@@ -26,6 +26,10 @@
                 <div class="signin-content">
                     <form method="POST" action="{{ route('login') }}" class="signup-form">
                         @csrf
+
+                        <h2 class="form-title">Banners System</h2>
+
+
                         <h2 class="form-title">Sign In</h2>
 
 
