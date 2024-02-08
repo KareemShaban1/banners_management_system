@@ -48,7 +48,7 @@
 
 
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign In" />
+                            <button type="submit" name="submit" id="submit" class="form-submit">Sign In</button>
                         </div>
                     </form>
 
