@@ -24,4 +24,9 @@ class Client extends Model
      * @var array
      */
     protected $fillable = ['name','company','phone_number','another_phone_number','address','class_id'];
+
+    public function receiveCashes()
+    {
+        return $this->hasMany(ReceiveCash::class);
+    }
 }

@@ -52,25 +52,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-
-                            $today_reminder = App\Models\ReceiveCashReminder::whereDate('receive_cash_reminder_date', Carbon\Carbon::today())->latest()->first();
-                        @endphp
-                        @if ($today_reminder)
-                            <tr>
-                                <td>{{ $today_reminder->receiveCash->id }}</td>
-                                <td>باقى الطلب رقم {{ $today_reminder->receiveCash->receipt_number }} </td>
-                                <td>{{ $today_reminder->receive_cash_reminder_date }}</td>
-                                <td>{{ $today_reminder->receiveCash->client->name }} </td>
-                                <td>{{ $today_reminder->receiveCash->service_price }} جنية</td>
-                                <td>{{ $today_reminder->paid_amount }} جنية</td>
-                                <td>{{ $today_reminder->remaining_amount }} جنية</td>
-                                <td> - </td>
-                                <td> لا توجد </td>
-                                <td></td>
-                            </tr>
-                        @endif
-
                         @foreach ($receiveCash as $cash)
                             @php
                                 $reminder = App\Models\ReceiveCashReminder::where('receive_cash_id', $cash->id)
@@ -153,6 +134,45 @@
                         @endforeach
 
 
+                        @php
+
+                            $today_reminders = App\Models\ReceiveCashReminder::whereDate('receive_cash_reminder_date', Carbon\Carbon::today())->get();
+                        @endphp
+                        {{-- @if ($today_reminder)
+                            <tr>
+                                <td>{{ $today_reminder->receiveCash->id }}</td>
+                                <td>باقى الطلب رقم {{ $today_reminder->receiveCash->receipt_number }} </td>
+                                <td>{{ $today_reminder->receive_cash_reminder_date }}</td>
+                                <td>{{ $today_reminder->receiveCash->client->name }} </td>
+                                <td>{{ $today_reminder->receiveCash->service_price }} جنية</td>
+                                <td>{{ $today_reminder->paid_amount }} جنية</td>
+                                <td>{{ $today_reminder->remaining_amount }} جنية</td>
+                                <td> - </td>
+                                <td> لا توجد </td>
+                                <td></td>
+                            </tr>
+                        @endif --}}
+                        @forelse ($today_reminders as $today_reminder)
+                            <tr style="color: red">
+                                <td>{{ $today_reminder->receiveCash->id }}</td>
+                                <td>باقى الطلب رقم {{ $today_reminder->receiveCash->receipt_number }}</td>
+                                <td>{{ $today_reminder->receive_cash_reminder_date }}</td>
+                                <td>{{ $today_reminder->receiveCash->client->name }}</td>
+                                <td>{{ $today_reminder->receiveCash->service_price }} جنية</td>
+                                <td>{{ $today_reminder->paid_amount }} جنية</td>
+                                <td>{{ $today_reminder->remaining_amount }} جنية</td>
+                                <td> - </td>
+                                <td> لا توجد </td>
+                                <td></td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="10">لا توجد تذكيرات لليوم</td>
+                            </tr>
+                        @endforelse
+
+
+
                     </tbody>
 
                     <tfoot>
@@ -162,7 +182,7 @@
                             </td>
                             <td colspan="9" style="text-align: center" id="totalAmount">
                                 {{ ($receiveCash ? $receiveCash->sum('paid_amount') : 0) +
-                                    ($today_reminder ? $today_reminder->sum('paid_amount') : 0) }}
+                                    ($today_reminders ? $today_reminders->sum('paid_amount') : 0) }}
                                 جنية
                             </td>
                         </tr>
@@ -173,7 +193,7 @@
                             </td>
                             <td colspan="9" style="text-align: center" id="totalAmount">
                                 {{ ($receiveCash ? $receiveCash->where('type', 'cash')->sum('paid_amount') : 0) +
-                                    ($today_reminder ? $today_reminder->where('type', 'cash')->sum('paid_amount') : 0) }}
+                                    ($today_reminders ? $today_reminders->where('type', 'cash')->sum('paid_amount') : 0) }}
                                 جنية
                             </td>
                         </tr>
@@ -184,7 +204,7 @@
                             </td>
                             <td colspan="9" style="text-align: center" id="totalAmount">
                                 {{ ($receiveCash ? $receiveCash->where('type', 'online')->sum('paid_amount') : 0) +
-                                    ($today_reminder ? $today_reminder->where('type', 'online')->sum('paid_amount') : 0) }}
+                                    ($today_reminders ? $today_reminders->where('type', 'online')->sum('paid_amount') : 0) }}
                                 جنية
                             </td>
                         </tr>

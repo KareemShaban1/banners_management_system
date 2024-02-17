@@ -24,9 +24,8 @@ class ReceiveCash extends Model
      *
      * @var array
      */
-    protected $fillable = ['receipt_number','receive_date','finish_date','material_id',
-    'client_id','user_id','service_price','paid_amount','remaining_amount','height',
-    'width','quantity','description','type'];
+    protected $fillable = ['receipt_number','receive_date','finish_date',
+    'client_id','user_id','service_price','paid_amount','remaining_amount','description','type'];
 
     protected static function booted()
     {
@@ -34,10 +33,10 @@ class ReceiveCash extends Model
         // while creating order make order number take the next available number
         static::creating(function (ReceiveCash $receiveCash) {
             $deleted_receiveCash = ReceiveCash::onlyTrashed()
-            ->whereNotNull('deleted_at')
-            ->get();
+                ->whereNotNull('deleted_at')
+                ->get();
 
-            if ($deleted_receiveCash !== null) {
+            if ($deleted_receiveCash->isNotEmpty()) {
                 // If there is a deleted receipt number, use it
                 $receiveCash->receipt_number = ReceiveCash::getNextOrderNumber() + 1;
             } else {
@@ -84,6 +83,11 @@ class ReceiveCash extends Model
             ->withTimestamps();
     }
 
+
+    public function receiveCashReminders()
+    {
+        return $this->hasMany(ReceiveCashReminder::class, 'receive_cash_id');
+    }
 
 
 }

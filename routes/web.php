@@ -55,6 +55,10 @@ Route::group([
     Route::group([], function () {
         Route::get('clients-autoComplete', [ClientController::class,'clientsAutocomplete'])->name('clients.autocomplete');
         Route::get('clients', [ClientController::class,'index'])->name('clients.index');
+        Route::get('client_info/{id}', [ClientController::class,'clientInfo'])->name('clients.clientInfo');
+        Route::get('client_pay/{id}', [ClientController::class,'payShow'])->name('clients.payShow');
+        Route::post('client_pay_store', [ClientController::class,'payStore'])->name('clients.payStore');
+
         Route::get('clients/create', [ClientController::class,'create'])->name('clients.create');
         Route::post('clients/store', [ClientController::class,'store'])->name('clients.store');
         Route::get('clients/edit/{client}', [ClientController::class,'edit'])->name('clients.edit');

@@ -26,12 +26,22 @@
                     </thead>
                     <tbody>
                         @foreach ($clients as $client)
+                            @php
+                                $receiveCashRemainingAmount = App\Models\ReceiveCash::where('client_id', $client->id)->sum('remaining_amount');
+
+                            @endphp
                             <tr>
                                 <td>{{ $client->id }}</td>
-                                <td>{{ $client->name }}</td>
+                                <td><a href="{{ route('clients.clientInfo', $client->id) }}"> {{ $client->name }}</a></td>
                                 <td>{{ $client->phone_number }}</td>
                                 <td>{{ $client->address }}</td>
                                 <td>
+                                    @if ($receiveCashRemainingAmount !== 0)
+                                        <a href="{{ route('clients.payShow', $client->id) }}" class="btn btn-warning">دفع
+                                            كلى</a>
+                                    @endif
+
+
                                     <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-warning">تعديل</a>
                                     <form action="{{ route('clients.delete', $client->id) }}" method="post"
                                         style="display:inline">
