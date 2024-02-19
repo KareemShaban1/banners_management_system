@@ -44,7 +44,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="tab-1" role="tabpanel"
                                 aria-labelledby="tab-1-tab">
-                                <div class="row">
+                                {{-- <div class="row">
                                     @foreach ($client->receiveCashes as $receiveCash)
                                         <div class="col-md-6" style="padding: 20px; border:1px solid black">
                                             <div class="row">
@@ -102,190 +102,137 @@
 
                                         </div>
                                     @endforeach
+                                </div> --}}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>رقم الفاتورة</th>
+                                                    <th>تاريخ الفاتورة</th>
+                                                    <th>تاريخ التسليم</th>
+                                                    <th>سعر الخدمة</th>
+                                                    <th>المبلغ المدفوع</th>
+                                                    <th>المبلغ المتبقي</th>
+                                                    <th>نوع الدفع</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($client->receiveCashes as $receiveCash)
+                                                    <tr>
+                                                        <td>{{ $receiveCash->receipt_number }}</td>
+                                                        <td>{{ $receiveCash->receive_date }}</td>
+                                                        <td>{{ $receiveCash->finish_date }}</td>
+                                                        <td>{{ $receiveCash->service_price }}</td>
+                                                        <td class="text-success">{{ $receiveCash->paid_amount }}</td>
+                                                        <td class="text-danger">{{ $receiveCash->remaining_amount }}</td>
+                                                        <td class="text-info">{{ $receiveCash->type }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+
                                 <div class="row">
-                                    @foreach ($client->receiveCashes->where('remaining_amount', 0) as $receiveCash)
-                                        <div class="col-md-6" style="padding: 20px; border:1px solid black">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>رقم الفاتورة : </p>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    {{ $receiveCash->receipt_number }}
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>تاريخ الفاتورة : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->receive_date }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>تاريخ التسليم : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->finish_date }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> سعر الخدمة : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->service_price }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> المبلغ المدفوع : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->paid_amount }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> المبلغ المتبقى : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->remaining_amount }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> نوع الدفع : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->type }}</div>
-                                            </div>
-
-
-                                        </div>
-                                    @endforeach
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>رقم الفاتورة</th>
+                                                    <th>تاريخ الفاتورة</th>
+                                                    <th>تاريخ التسليم</th>
+                                                    <th>سعر الخدمة</th>
+                                                    <th>المبلغ المدفوع</th>
+                                                    <th>المبلغ المتبقي</th>
+                                                    <th>نوع الدفع</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($client->receiveCashes->where('remaining_amount', 0) as $receiveCash)
+                                                    <tr>
+                                                        <td>{{ $receiveCash->receipt_number }}</td>
+                                                        <td>{{ $receiveCash->receive_date }}</td>
+                                                        <td>{{ $receiveCash->finish_date }}</td>
+                                                        <td>{{ $receiveCash->service_price }}</td>
+                                                        <td class="text-success">{{ $receiveCash->paid_amount }}</td>
+                                                        <td class="text-danger">{{ $receiveCash->remaining_amount }}</td>
+                                                        <td class="text-info">{{ $receiveCash->type }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
+
                                 <div class="row">
-                                    @foreach ($client->receiveCashes->where('remaining_amount', '>', 0) as $receiveCash)
-                                        <div class="col-md-6" style="padding: 20px; border:1px solid black">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>رقم الفاتورة : </p>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    {{ $receiveCash->receipt_number }}
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>تاريخ الفاتورة : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->receive_date }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>تاريخ التسليم : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->finish_date }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> سعر الخدمة : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->service_price }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> المبلغ المدفوع : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->paid_amount }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> المبلغ المتبقى : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->remaining_amount }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> نوع الدفع : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->type }}</div>
-                                            </div>
-
-
-                                        </div>
-                                    @endforeach
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>رقم الفاتورة</th>
+                                                    <th>تاريخ الفاتورة</th>
+                                                    <th>تاريخ التسليم</th>
+                                                    <th>سعر الخدمة</th>
+                                                    <th>المبلغ المدفوع</th>
+                                                    <th>المبلغ المتبقي</th>
+                                                    <th>نوع الدفع</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($client->receiveCashes->where('remaining_amount', '>', 0) as $receiveCash)
+                                                    <tr>
+                                                        <td>{{ $receiveCash->receipt_number }}</td>
+                                                        <td>{{ $receiveCash->receive_date }}</td>
+                                                        <td>{{ $receiveCash->finish_date }}</td>
+                                                        <td>{{ $receiveCash->service_price }}</td>
+                                                        <td class="text-success">{{ $receiveCash->paid_amount }}</td>
+                                                        <td class="text-danger">{{ $receiveCash->remaining_amount }}</td>
+                                                        <td class="text-info">{{ $receiveCash->type }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
+
                                 <div class="row">
-                                    @foreach ($client->receiveCashes->where('paid_amount', 0) as $receiveCash)
-                                        <div class="col-md-6" style="padding: 20px; border:1px solid black">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>رقم الفاتورة : </p>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    {{ $receiveCash->receipt_number }}
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>تاريخ الفاتورة : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->receive_date }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p>تاريخ التسليم : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->finish_date }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> سعر الخدمة : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->service_price }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> المبلغ المدفوع : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->paid_amount }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> المبلغ المتبقى : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->remaining_amount }}</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <p> نوع الدفع : </p>
-                                                </div>
-                                                <div class="col-md-6">{{ $receiveCash->type }}</div>
-                                            </div>
-
-
-                                        </div>
-                                    @endforeach
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>رقم الفاتورة</th>
+                                                    <th>تاريخ الفاتورة</th>
+                                                    <th>تاريخ التسليم</th>
+                                                    <th>سعر الخدمة</th>
+                                                    <th>المبلغ المدفوع</th>
+                                                    <th>المبلغ المتبقي</th>
+                                                    <th>نوع الدفع</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($client->receiveCashes->where('paid_amount', 0) as $receiveCash)
+                                                    <tr>
+                                                        <td>{{ $receiveCash->receipt_number }}</td>
+                                                        <td>{{ $receiveCash->receive_date }}</td>
+                                                        <td>{{ $receiveCash->finish_date }}</td>
+                                                        <td>{{ $receiveCash->service_price }}</td>
+                                                        <td class="text-success">{{ $receiveCash->paid_amount }}</td>
+                                                        <td class="text-danger">{{ $receiveCash->remaining_amount }}</td>
+                                                        <td class="text-info">{{ $receiveCash->type }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

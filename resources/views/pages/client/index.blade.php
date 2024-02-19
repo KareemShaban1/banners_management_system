@@ -21,6 +21,7 @@
                             <th>أسم العميل</th>
                             <th>رقم الهاتف</th>
                             <th>العنوان</th>
+                            <th>المديونية</th>
                             <th>العمليات</th>
                         </tr>
                     </thead>
@@ -36,8 +37,15 @@
                                 <td>{{ $client->phone_number }}</td>
                                 <td>{{ $client->address }}</td>
                                 <td>
+                                    <p class="text-danger m-0">{{ $receiveCashRemainingAmount }} جنية
+                                    </p>
+                                </td>
+                                <td>
+                                    <a href="{{ route('clients.clientInfo', $client->id) }}" class="btn btn-primary">عرض
+                                        سجلات الدفع
+                                    </a>
                                     @if ($receiveCashRemainingAmount !== 0)
-                                        <a href="{{ route('clients.payShow', $client->id) }}" class="btn btn-warning">دفع
+                                        <a href="{{ route('clients.payShow', $client->id) }}" class="btn btn-info">دفع
                                             كلى</a>
                                     @endif
 

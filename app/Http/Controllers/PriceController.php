@@ -18,7 +18,16 @@ class PriceController extends Controller
     public function index()
     {
         //
-        $prices = Price::with('class', 'material')->get();
+        // $prices = Price::with('class', 'material')->withoutTrashed()->get();
+
+        $prices = Price::whereHas('class', function ($query) {
+            $query->withoutTrashed();
+        })
+        ->whereHas('material', function ($query) {
+            $query->withoutTrashed();
+        })
+        ->withoutTrashed()
+        ->get();
         return view('pages.price.index', compact('prices'));
     }
 
