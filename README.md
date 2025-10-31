@@ -1,9 +1,8 @@
-```markdown
 # Banners Management System
 
 A web-based banner management application (Laravel-style) that provides an admin interface to create, schedule, organize, and deliver banners across a website or multiple sites. The project combines Blade server-rendered views with a responsive CSS/SCSS frontend and JavaScript for interactivity.
 
-Table of contents
+## Table of contents
 - [Purpose](#purpose)
 - [Key features](#key-features)
 - [Built with](#built-with)
@@ -157,4 +156,3 @@ Add a LICENSE file to the repository and state the license here (e.g., MIT). If 
 
 Author / Contact
 KareemShaban1 — https://github.com/KareemShaban1
-```
